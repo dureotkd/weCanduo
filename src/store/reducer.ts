@@ -1,7 +1,8 @@
 import {combineReducers} from 'redux';
-import {themeSlice} from '../slices';
+import {themeSlice, userSlice} from '../slices';
 const rootReducer = combineReducers({
   theme: themeSlice.reducer,
+  user: userSlice.reducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

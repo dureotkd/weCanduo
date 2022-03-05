@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   StatusBar,
   Image,
+  ActivityIndicator,
 } from 'react-native';
 import {styles} from '../assets';
 
@@ -17,6 +18,7 @@ function AuthView({
   themeBgStyle,
   _handleAnimation,
   _handleKaKaoOauth,
+  loading,
 }) {
   return (
     <Animated.View style={[styles.safeConatiner, themeBgStyle]}>
@@ -35,8 +37,13 @@ function AuthView({
         <TouchableOpacity
           onPress={_handleKaKaoOauth}
           style={styles.kakaoBtn}
+          disabled={loading}
           activeOpacity={0.7}>
-          <Text style={styles.boldCenterText}>카카오로 시작하기</Text>
+          {loading ? (
+            <ActivityIndicator color="black" />
+          ) : (
+            <Text style={styles.boldCenterText}>카카오로 시작하기</Text>
+          )}
         </TouchableOpacity>
       </View>
     </Animated.View>

@@ -1,5 +1,6 @@
 import Auth from './Auth';
 import Join from './Join';
-import SummonerAuth from './SummonerAuth';
+import Main from './Main';
+import Article from './Article';
 
-export {Auth, Join, SummonerAuth};
+export {Auth, Join, Article, Main};

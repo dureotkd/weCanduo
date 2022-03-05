@@ -13,10 +13,6 @@ function Join({navigation}) {
   const [summonerText, setSummonerText] = useState('');
   const disabledBtn = summonerText ? false : true;
 
-  const _handleDisabledBtn = useCallback(() => {
-    console.log(summonerText.length);
-  }, [summonerText]);
-
   /**
    *
    */
