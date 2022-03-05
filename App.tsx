@@ -8,35 +8,19 @@
  * @format
  */
 
-import React, {useEffect} from 'react';
-import {Alert, SafeAreaView, StyleSheet} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {StatusBar} from 'react-native';
 import Config from 'react-native-config';
+import {Provider} from 'react-redux';
+import AppIndex from './AppIndex';
+import store from './src/store';
 
 const App = () => {
-  useEffect(() => {
-    console.log(Config.API_URL);
-  }, []);
-
-  return <SafeAreaView></SafeAreaView>;
+  return (
+    <Provider store={store}>
+      <AppIndex />
+    </Provider>
+  );
 };
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default App;
