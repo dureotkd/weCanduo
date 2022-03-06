@@ -4,8 +4,8 @@ const styles = StyleSheet.create({
   safeConatiner: {
     flex: 1,
     display: 'flex',
-    padding: 12,
     height: '100%',
+    padding: 6,
   },
   defaultConatiner: {
     padding: 12,
@@ -25,6 +25,11 @@ const styles = StyleSheet.create({
     marginTop: 36,
     borderRadius: 3,
     height: 40,
+  },
+  rowCenter: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 8,
   },
   disabledBtn: {
     height: 40,
@@ -51,6 +56,17 @@ const styles = StyleSheet.create({
     borderColor: '#d69e2e',
     borderWidth: 1,
   },
+  kakaoImg: {
+    width: 32,
+    height: 32,
+    zIndex: 10,
+  },
+  spaceRow: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+  },
   defaultBtn: {
     backgroundColor: '#2195f2',
     borderRadius: 6,
@@ -67,8 +83,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#F9E000',
     padding: 12,
     width: 300,
+    height: 50,
     marginTop: 15,
     borderRadius: 3,
+    display: 'flex',
+    justifyContent: 'center',
   },
   boldCenterText: {
     fontWeight: 'bold',

@@ -38,11 +38,17 @@ function AuthView({
           onPress={_handleKaKaoOauth}
           style={styles.kakaoBtn}
           disabled={loading}
-          activeOpacity={0.7}>
+          activeOpacity={1}>
           {loading ? (
             <ActivityIndicator color="black" />
           ) : (
-            <Text style={styles.boldCenterText}>카카오로 시작하기</Text>
+            <View style={styles.spaceRow}>
+              <Image
+                style={styles.kakaoImg}
+                source={{uri: 'https://imki123.github.io/images/kakao.png'}}
+              />
+              <Text style={styles.boldCenterText}>카카오로 시작하기</Text>
+            </View>
           )}
         </TouchableOpacity>
       </View>

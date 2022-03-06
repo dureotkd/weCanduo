@@ -1,18 +1,34 @@
-import React, {useCallback, useEffect} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {Platform, StatusBar, Text} from 'react-native';
+import {TouchableOpacity, Animated, View, StatusBar, Text} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 import {userSlice} from './src/slices';
-import AsyncStorage from '@react-native-community/async-storage';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import axiosController from './src/api/axiosController';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Auth, Join, Main, Article, Profile} from './src/controllers';
+import {styles} from './src/assets';
+import getTheme from './src/animations/theme';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+
+function TabBarIconComponent({focused, color, size, route}) {
+  let iconName;
+  if (route.name === 'Main') {
+    iconName = focused ? 'compass' : 'compass-outline';
+    color = focused ? '#e8c488' : '#757575';
+  } else if (route.name === 'Article') {
+    iconName = focused ? 'chat' : 'chat-outline';
+    color = focused ? '#e8c488' : '#757575';
+  } else {
+    iconName = focused ? 'account' : 'account-outline';
+    color = focused ? '#e8c488' : '#757575';
+  }
+  return <MaterialCommunityIcons size={size} color={color} name={iconName} />;
+}
 
 function AppIndex() {
   const dispatch = useDispatch();
@@ -44,37 +60,73 @@ function AppIndex() {
   return (
     <NavigationContainer>
       <StatusBar barStyle={themeIndex ? 'dark-content' : 'light-content'} />
-      {accessToken ? (
+      {!accessToken ? (
         <Tab.Navigator
-          screenOptions={{
+          screenOptions={({route}) => ({
             tabBarShowLabel: false,
             tabBarStyle: {
               borderTopWidth: 0,
               height: 60,
-              backgroundColor: '#000000',
               elevation: 0,
               shadowOpacity: 0,
+              backgroundColor: themeIndex ? 'white' : 'black',
+            },
+            tabBarIcon: ({focused, color, size}) => {
+              return (
+                <TabBarIconComponent
+                  route={route}
+                  focused={focused}
+                  color={color}
+                  size={size}
+                />
+              );
             },
             headerTitle: '',
             headerStyle: {
               borderBottomWidth: 0,
               elevation: 0,
               shadowOpacity: 0,
-              backgroundColor: '#000000',
-              height: 80,
+              backgroundColor: themeIndex ? 'white' : 'black',
             },
             headerLeft: () => {
-              return <Text style={{color: 'white'}}>asdads</Text>;
+              return (
+                <View style={[styles.rowCenter]}>
+                  <View style={{marginLeft: 6}}>
+                    <View>
+                      <Animated.Text
+                        style={[
+                          {
+                            fontWeight: 'bold',
+                            fontSize: 16,
+                            color: themeIndex ? 'black' : 'white',
+                          },
+                        ]}>
+                        dddfasf
+                      </Animated.Text>
+                    </View>
+                    <View style={{marginTop: 3}}>
+                      <Animated.Text
+                        style={{color: themeIndex ? 'black' : 'white'}}>
+                        asd
+                      </Animated.Text>
+                    </View>
+                  </View>
+                </View>
+              );
             },
             headerRight: () => {
               return (
-                <MaterialCommunityIcons name="bell" style={{color: 'white'}}>
-                  asdads
-                </MaterialCommunityIcons>
+                <TouchableOpacity>
+                  <MaterialCommunityIcons
+                    name="bell"
+                    size={23}
+                    style={{color: 'white', marginRight: 15}}
+                  />
+                </TouchableOpacity>
               );
             },
-          }}>
-          <Tab.Screen name="'Main" component={Main} />
+          })}>
+          <Tab.Screen name="Main" component={Main} />
           <Tab.Screen name="Article" component={Article} />
           <Stack.Screen name="Profile" component={Profile} />
         </Tab.Navigator>

@@ -2,8 +2,8 @@ import React, {useCallback, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {JoinView} from '../views';
 import getTheme from '../animations/theme';
-
-function Join({navigation}) {
+import axiosController from '../api/axiosController';
+function Join({route, navigation}) {
   const dispatch = useDispatch();
   // Theme ==================
   const themeIndex = useSelector(state => state.theme.flag);
@@ -11,13 +11,19 @@ function Join({navigation}) {
   // Theme ==================
 
   const [summonerText, setSummonerText] = useState('');
+  const {data} = route.params;
+
   const disabledBtn = summonerText ? false : true;
 
   /**
    *
    */
-  const _handleSummoner = () => {
-    console.log(summonerText);
+  const _handleSummoner = async () => {
+    // await axiosController({
+    //   method: 'post',
+    //   url: '/users',
+    //   data: data,
+    // });
   };
 
   return (
@@ -29,6 +35,7 @@ function Join({navigation}) {
       _handleSummoner={_handleSummoner}
       setSummonerText={setSummonerText}
       disabledBtn={disabledBtn}
+      navigation={navigation}
     />
   );
 }

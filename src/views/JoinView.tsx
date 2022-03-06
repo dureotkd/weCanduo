@@ -17,6 +17,7 @@ function JoinView({
   _handleSummoner,
   disabledBtn,
   setSummonerText,
+  navigation,
 }) {
   return (
     <Animated.View style={[styles.centrConatiner, themeBgStyle]}>
@@ -34,7 +35,7 @@ function JoinView({
           disabled={disabledBtn}
           style={[disabledBtn ? styles.disabledBtn : styles.confirmBtn]}
           onPress={_handleSummoner}>
-          <Text style={styles.defaultText}>입력</Text>
+          <Text style={[styles.defaultText]}>입력</Text>
         </TouchableOpacity>
       </View>
     </Animated.View>

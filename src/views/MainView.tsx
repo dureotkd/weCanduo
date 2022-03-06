@@ -12,7 +12,9 @@ function MainView({
   return (
     <Animated.View style={[styles.safeConatiner, themeBgStyle]}>
       <SafeAreaView>
-        <Animated.Text style={[themeFontStyle]}>MainView</Animated.Text>
+        <Animated.Text style={[themeFontStyle]}>
+          MainView {themeIndex}
+        </Animated.Text>
       </SafeAreaView>
     </Animated.View>
   );

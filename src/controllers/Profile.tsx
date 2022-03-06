@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {ProfileView} from '../views';
 import {useDispatch, useSelector} from 'react-redux';
-import {userSlice} from '../slices';
+import {userSlice, themeSlice} from '../slices';
 import axiosController from '../api/axiosController';
 import getTheme from '../animations/theme';
 

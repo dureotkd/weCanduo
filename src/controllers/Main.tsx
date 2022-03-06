@@ -11,6 +11,7 @@ function Main({navigation}) {
   const {themeBgStyle, themeFontStyle, _handleAnimation} = getTheme(themeIndex);
   const [loading, setLoading] = useState(false);
 
+  console.log(themeIndex);
   // Theme ==================
 
   return (

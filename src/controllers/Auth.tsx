@@ -48,19 +48,14 @@ function Auth({navigation}) {
         refreshTokenExpiresAt,
       };
 
-      axiosController({
-        method: 'post',
-        url: '/users',
-        data: data,
-      });
+      setLoading(false);
 
-      EncryptedStorage.setItem('accessToken', accessToken);
-
-      dispatch(
-        userSlice.actions.setUser({
-          data,
-        }),
-      );
+      // axiosController({
+      //   method: 'post',
+      //   url: '/users',
+      //   data: data,
+      // });
+      navigation.navigate('Join', {data});
     } else {
       setLoading(false);
     }
