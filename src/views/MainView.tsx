@@ -1,5 +1,5 @@
 import React from 'react';
-import {Animated} from 'react-native';
+import {Animated, SafeAreaView} from 'react-native';
 import {styles} from '../assets';
 
 function MainView({
@@ -11,7 +11,9 @@ function MainView({
 }) {
   return (
     <Animated.View style={[styles.safeConatiner, themeBgStyle]}>
-      <Animated.Text style={[themeFontStyle]}>MainView</Animated.Text>
+      <SafeAreaView>
+        <Animated.Text style={[themeFontStyle]}>MainView</Animated.Text>
+      </SafeAreaView>
     </Animated.View>
   );
 }

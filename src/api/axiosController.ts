@@ -1,9 +1,11 @@
 import axios from 'axios';
+import {Alert} from 'react-native';
 import Config from 'react-native-config';
 
+const timeout = 2500;
 const instance = axios.create({
   baseURL: `${Config.API_URL}/api`,
-  timeout: 2500,
+  timeout: timeout,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -13,13 +15,13 @@ const instance = axios.create({
 instance.interceptors.request.use(
   // 요청 보내기 전  수행로직
   config => {
-    console.log('요청 보내기 전  수행로직');
-
     return config;
   },
 
   // 요청 에러 발생시 수행로직
   error => {
+    Alert.alert('알림', 'REQUEST ERROR 발생');
+
     return Promise.reject(error);
   },
 );
@@ -35,6 +37,8 @@ instance.interceptors.response.use(
 
   // 응답 에러
   error => {
+    Alert.alert('알림', 'RESPONESE ERROR 발생');
+
     return Promise.reject(error);
   },
 );

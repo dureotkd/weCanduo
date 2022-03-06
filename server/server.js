@@ -28,8 +28,18 @@ http.listen(8090, (req, res) => {
 router.get('/', (req, res) => {
   res.send('Hello RESTFUL API ');
 });
-router.get('/users', (req, res) => {
+router.get('/users', async (req, res) => {
   const {accessToken} = req.query;
+
+  if (!accessToken) {
+    req.status(404).send({success: false});
+  }
+
+  const user = await userModel.getRow({
+    accessToken,
+  });
+
+  res.send({user});
 });
 
 router.post('/users', (req, res) => {

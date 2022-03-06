@@ -3,5 +3,13 @@ import JoinView from './JoinView';
 import MainView from './MainView';
 import ArticleView from './ArticleView';
 import SummonerAuthView from './SummonerAuthView';
+import ProfileView from './ProfileView';
 
-export {AuthView, SummonerAuthView, JoinView, MainView, ArticleView};
+export {
+  AuthView,
+  SummonerAuthView,
+  JoinView,
+  MainView,
+  ArticleView,
+  ProfileView,
+};

@@ -11,7 +11,19 @@ class UserModel extends Core {
 
   getData() {}
 
-  getRow() {}
+  getRow(obj) {
+    const column = Object.keys(obj)[0];
+    const value = Object.values(obj)[0];
+    const sql = `SELECT * FROM lolDuo.${this.table} a WHERE a.${column} = '${value}'`;
+
+    const row = this.core.excute({
+      database: 'lolDuo',
+      sql: sql,
+      type: 'row',
+    });
+
+    return row;
+  }
 
   getRowByPk(seq) {
     const sql = `SELECT * FROM lolDuo.${this.table} a WHERE a.draftSeq = '${seq}'`;
