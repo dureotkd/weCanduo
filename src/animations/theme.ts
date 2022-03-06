@@ -18,13 +18,13 @@ const getTheme = themeIndex => {
     const theme = toggled ? 0 : 1;
     Animated.timing(bgAnimation, {
       toValue: theme,
-      duration: 300,
+      duration: 100,
       useNativeDriver: false,
     }).start();
 
     Animated.timing(fontAnimation, {
       toValue: theme,
-      duration: 300,
+      duration: 100,
       useNativeDriver: false,
     }).start();
 

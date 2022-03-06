@@ -44,28 +44,36 @@ router.get('/users', async (req, res) => {
 
 router.post('/users', (req, res) => {
   const {
-    nickname,
-    profileImageUrl,
-    email,
-    accessToken,
-    refreshToken,
-    accessTokenExpiresAt,
-    refreshTokenExpiresAt,
+    userData,
+    accountId,
+    id,
+    name,
+    profileIconId,
+    puuid,
+    revisionDate,
+    summonerLevel,
+    wins,
+    losses,
+    rank,
+    tier,
+    championMastery,
   } = req.body;
 
-  const result = userModel.save({
-    nickname,
-    profileImageUrl,
-    email,
-    accessToken,
-    refreshToken,
-    accessTokenExpiresAt,
-    refreshTokenExpiresAt,
-  });
+  console.log(userData);
 
-  if (result) {
-    res.status(201).send({success: true});
-  } else {
-    res.status(400).send({success: false});
-  }
+  // const result = userModel.save({
+  //   nickname,
+  //   profileImageUrl,
+  //   email,
+  //   accessToken,
+  //   refreshToken,
+  //   accessTokenExpiresAt,
+  //   refreshTokenExpiresAt,
+  // });
+
+  // if (result) {
+  //   res.status(201).send({success: true});
+  // } else {
+  //   res.status(400).send({success: false});
+  // }
 });

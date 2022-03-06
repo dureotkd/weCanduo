@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   },
   confirmBtn: {
     height: 40,
-    backgroundColor: 'blue',
+    backgroundColor: '#303f9f',
     borderRadius: 3,
     marginTop: 12,
     display: 'flex',

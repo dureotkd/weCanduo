@@ -50,11 +50,6 @@ function Auth({navigation}) {
 
       setLoading(false);
 
-      // axiosController({
-      //   method: 'post',
-      //   url: '/users',
-      //   data: data,
-      // });
       navigation.navigate('Join', {data});
     } else {
       setLoading(false);
@@ -76,7 +71,8 @@ function Auth({navigation}) {
       const res = await getKakaoProfile();
       return res;
     } catch (e) {
-      return e;
+      console.log(`kakaoProfile ${e}`);
+      return false;
     }
   };
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  ActivityIndicator,
   Animated,
   SafeAreaView,
   Text,
@@ -18,6 +19,7 @@ function JoinView({
   disabledBtn,
   setSummonerText,
   navigation,
+  loading,
 }) {
   return (
     <Animated.View style={[styles.centrConatiner, themeBgStyle]}>
@@ -32,10 +34,14 @@ function JoinView({
         />
         <TouchableOpacity
           activeOpacity={0.7}
-          disabled={disabledBtn}
+          disabled={loading || disabledBtn}
           style={[disabledBtn ? styles.disabledBtn : styles.confirmBtn]}
           onPress={_handleSummoner}>
-          <Text style={[styles.defaultText]}>입력</Text>
+          {loading ? (
+            <ActivityIndicator />
+          ) : (
+            <Text style={[styles.defaultText]}>입력</Text>
+          )}
         </TouchableOpacity>
       </View>
     </Animated.View>
