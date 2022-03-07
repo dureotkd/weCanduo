@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   rowCenter: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 8,
+    padding: 10,
   },
   disabledBtn: {
     height: 40,
@@ -92,6 +92,7 @@ const styles = StyleSheet.create({
   boldCenterText: {
     fontWeight: 'bold',
     textAlign: 'center',
+    color: 'black',
   },
 });
 

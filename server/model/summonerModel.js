@@ -1,11 +1,11 @@
 'use strict';
 const Core = require('./core');
 
-class UserModel extends Core {
+class SummonerModel extends Core {
   constructor(props) {
     super(props);
 
-    this.table = 'user';
+    this.table = 'summoner';
     this.core = new Core();
   }
 
@@ -14,18 +14,7 @@ class UserModel extends Core {
   getRow(obj) {
     const column = Object.keys(obj)[0];
     const value = Object.values(obj)[0];
-    const sql = `
-    SELECT 
-      * 
-    FROM 
-      lolDuo.${this.table} a,
-      lolDuo.summoner b
-    WHERE 
-      a.id = b.userId
-    AND
-      a.${column} = '${value}'`;
-
-    console.log(sql);
+    const sql = `SELECT * FROM lolDuo.${this.table} a WHERE a.${column} = '${value}'`;
 
     const row = this.core.excute({
       database: 'lolDuo',
@@ -85,6 +74,6 @@ class UserModel extends Core {
   }
 }
 
-const userModel = new UserModel();
+const summonerModel = new SummonerModel();
 
-module.exports = userModel;
+module.exports = summonerModel;

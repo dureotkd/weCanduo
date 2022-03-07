@@ -11,14 +11,9 @@ import {AuthView} from '../views';
 import {useDispatch, useSelector} from 'react-redux';
 import {userSlice} from '../slices';
 import axiosController from '../api/axiosController';
-import getTheme from '../animations/theme';
 import EncryptedStorage from 'react-native-encrypted-storage';
 
 function Auth({navigation}) {
-  const dispatch = useDispatch();
-  const themeIndex = useSelector(state => state.theme.flag);
-  const {themeBgStyle, themeFontStyle, _handleAnimation} = getTheme(themeIndex);
-
   const [loading, setLoading] = useState(false);
 
   // Theme ==================
@@ -76,16 +71,7 @@ function Auth({navigation}) {
     }
   };
 
-  return (
-    <AuthView
-      themeIndex={themeIndex}
-      themeBgStyle={themeBgStyle}
-      themeFontStyle={themeFontStyle}
-      _handleAnimation={_handleAnimation}
-      _handleKaKaoOauth={_handleKaKaoOauth}
-      loading={loading}
-    />
-  );
+  return <AuthView _handleKaKaoOauth={_handleKaKaoOauth} loading={loading} />;
 }
 
 export default Auth;

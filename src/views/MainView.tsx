@@ -1,22 +1,14 @@
 import React from 'react';
-import {Animated, SafeAreaView} from 'react-native';
-import {styles} from '../assets';
+import {SafeAreaView, ScrollView} from 'react-native';
+import {Container, DefaultText} from '../assets/theme';
 
-function MainView({
-  themeIndex,
-  themeFontStyle,
-  themeBgStyle,
-  _handleAnimation,
-  loading,
-}) {
+function MainView({loading, summoner}) {
   return (
-    <Animated.View style={[styles.safeConatiner, themeBgStyle]}>
-      <SafeAreaView>
-        <Animated.Text style={[themeFontStyle]}>
-          MainView {themeIndex}
-        </Animated.Text>
-      </SafeAreaView>
-    </Animated.View>
+    <Container>
+      <ScrollView style={{padding: 8}}>
+        <DefaultText>안녕하세요</DefaultText>
+      </ScrollView>
+    </Container>
   );
 }
 

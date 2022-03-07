@@ -1,27 +1,30 @@
 import React from 'react';
 import {Animated, Switch, SafeAreaView} from 'react-native';
-import {styles} from '../assets';
+import styled from 'styled-components';
 
-function ProfileView({
-  themeIndex,
-  themeFontStyle,
-  themeBgStyle,
-  _handleAnimation,
-  loading,
-}) {
+const Container = styled.View`
+  flex: 1;
+  background-color: ${({theme}) => {
+    return theme.bgColor;
+  }};
+`;
+
+const DefaultText = styled.Text`
+  color: ${({theme}) => {
+    return theme.color;
+  }};
+`;
+
+function ProfileView({loading}) {
   return (
-    <Animated.View style={[styles.safeConatiner, themeBgStyle]}>
+    <Container>
       <SafeAreaView>
-        <Animated.Text style={[themeFontStyle]}>ProfileView</Animated.Text>
-        <Switch
-          trackColor={{false: '#767577', true: '#81b0ff'}}
-          thumbColor={themeIndex ? '#f5dd4b' : '#f4f3f4'}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={_handleAnimation}
-          value={themeIndex === 0}
-        />
+        <DefaultText>ProfileView</DefaultText>
+        <DefaultText>ProfileView</DefaultText>
+        <DefaultText>ProfileView</DefaultText>
+        <DefaultText>ProfileView</DefaultText>
       </SafeAreaView>
-    </Animated.View>
+    </Container>
   );
 }
 

@@ -1,20 +1,15 @@
 import React from 'react';
 import {Animated, SafeAreaView} from 'react-native';
 import {styles} from '../assets';
+import {Container, DefaultText} from '../assets/theme';
 
-function ArticleView({
-  themeIndex,
-  themeFontStyle,
-  themeBgStyle,
-  _handleAnimation,
-  loading,
-}) {
+function ArticleView({loading}) {
   return (
-    <Animated.View style={[styles.safeConatiner, themeBgStyle]}>
+    <Container style={[styles.safeConatiner]}>
       <SafeAreaView>
-        <Animated.Text style={[themeFontStyle]}>ArticleView</Animated.Text>
+        <DefaultText style={[]}>ArticleView</DefaultText>
       </SafeAreaView>
-    </Animated.View>
+    </Container>
   );
 }
 

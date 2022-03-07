@@ -8,9 +8,7 @@
  * @format
  */
 
-import React, {useEffect, useState} from 'react';
-import {StatusBar} from 'react-native';
-import Config from 'react-native-config';
+import React from 'react';
 import {Provider} from 'react-redux';
 import AppIndex from './AppIndex';
 import store from './src/store';

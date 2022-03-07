@@ -3,6 +3,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const userModel = require('./model/userModel');
+const summonerModel = require('./model/summonerModel');
 
 const app = express();
 const http = require('http').createServer(app);
@@ -26,7 +27,7 @@ http.listen(8090, (req, res) => {
 });
 
 router.get('/', (req, res) => {
-  res.send('Hello RESTFUL API ');
+  res.send('Hello RESTFUL API !! ');
 });
 router.get('/users', async (req, res) => {
   const {accessToken} = req.query;
@@ -39,10 +40,12 @@ router.get('/users', async (req, res) => {
     accessToken,
   });
 
+  console.log(user);
+
   res.send({user});
 });
 
-router.post('/users', (req, res) => {
+router.post('/users', async (req, res) => {
   const {
     userData,
     accountId,
@@ -59,17 +62,31 @@ router.post('/users', (req, res) => {
     championMastery,
   } = req.body;
 
-  console.log(userData);
+  const userInserId = await userModel.save({
+    nickname: userData.nickname,
+    profileImageUrl: userData.profileImageUrl,
+    email: userData.email,
+    accessToken: userData.accessToken,
+    refreshToken: userData.refreshToken,
+    accessTokenExpiresAt: userData.accessTokenExpiresAt,
+    refreshTokenExpiresAt: userData.refreshTokenExpiresAt,
+  });
 
-  // const result = userModel.save({
-  //   nickname,
-  //   profileImageUrl,
-  //   email,
-  //   accessToken,
-  //   refreshToken,
-  //   accessTokenExpiresAt,
-  //   refreshTokenExpiresAt,
-  // });
+  await summonerModel.save({
+    accountId,
+    userId: userInserId,
+    lolId: id,
+    name,
+    profileIconId,
+    puuid,
+    level: summonerLevel,
+    wins,
+    losses,
+    rank,
+    tier,
+  });
+
+  res.status(201).send({success: true});
 
   // if (result) {
   //   res.status(201).send({success: true});

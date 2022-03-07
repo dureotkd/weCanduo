@@ -18,8 +18,6 @@ const userSlice = createSlice({
       state.profileImageUrl = action.payload.data.profileImageUrl;
       state.refreshToken = action.payload.data.refreshToken;
       state.accessToken = action.payload.data.accessToken;
-
-      console.log(state);
     },
   },
   extraReducers: _builder => {},

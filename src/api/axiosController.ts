@@ -4,7 +4,7 @@ import Config from 'react-native-config';
 
 const timeout = 2500;
 const instance = axios.create({
-  baseURL: `${Config.API_URL}/api`,
+  baseURL: `http://192.168.35.217:8090/api`,
   timeout: timeout,
   headers: {
     'Content-Type': 'application/json',

@@ -75,7 +75,7 @@ class Core {
               case 'exec':
                 console.log(err);
 
-                resolve(data.insertId);
+                resolve(data?.insertId || 1);
 
                 break;
 

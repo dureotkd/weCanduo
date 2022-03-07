@@ -1,20 +1,16 @@
 import React from 'react';
 import {
   ActivityIndicator,
-  Animated,
   SafeAreaView,
   Text,
   TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
-import {styles, theme} from '../assets';
-
+import {styles} from '../assets';
+import {Container, DefaultText} from '../assets/theme';
+import DismissKeyboard from '../components/DismissKeyboard';
 function JoinView({
-  themeIndex,
-  themeFontStyle,
-  themeBgStyle,
-  _handleAnimation,
   _handleSummoner,
   disabledBtn,
   setSummonerText,
@@ -22,11 +18,11 @@ function JoinView({
   loading,
 }) {
   return (
-    <Animated.View style={[styles.centrConatiner, themeBgStyle]}>
-      <View style={{width: '80%'}}>
-        <Animated.Text style={[themeFontStyle, {fontSize: 18}]}>
+    <Container>
+      <DismissKeyboard style={{height: '100%', padding: 26}}>
+        <DefaultText style={{fontSize: 18}}>
           소환사명을 입력해주세요
-        </Animated.Text>
+        </DefaultText>
         <TextInput
           onChangeText={text => setSummonerText(text)}
           style={styles.textInput}
@@ -43,8 +39,8 @@ function JoinView({
             <Text style={[styles.defaultText]}>입력</Text>
           )}
         </TouchableOpacity>
-      </View>
-    </Animated.View>
+      </DismissKeyboard>
+    </Container>
   );
 }
 

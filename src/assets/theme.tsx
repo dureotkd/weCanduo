@@ -1,3 +1,5 @@
+import styled from 'styled-components';
+
 const theme = {
   // light
   light: {
@@ -11,4 +13,24 @@ const theme = {
   },
 };
 
-export default theme;
+const Container = styled.SafeAreaView`
+  flex: 1;
+  background-color: ${({theme}) => {
+    return theme.bgColor;
+  }};
+`;
+
+const ContainerPressable = styled.Pressable`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+`;
+
+const DefaultText = styled.Text`
+  color: ${({theme}) => {
+    return theme.color;
+  }};
+`;
+
+export {theme, Container, DefaultText, ContainerPressable};

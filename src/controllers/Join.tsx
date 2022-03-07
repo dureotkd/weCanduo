@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {JoinView} from '../views';
-import getTheme from '../animations/theme';
 import axiosController from '../api/axiosController';
 import axios from 'axios';
 import {
@@ -11,17 +10,13 @@ import {
   championMasteryUrl,
 } from '../api/leagueApi';
 import {Alert, ActivityIndicator} from 'react-native';
-import {empty} from '../assets/defaut';
+import {userSlice, summonerSlice} from '../slices';
+import EncryptedStorage from 'react-native-encrypted-storage';
 
 function Join({route, navigation}) {
   const dispatch = useDispatch();
-  // Theme ==================
-  const themeIndex = useSelector(state => state.theme.flag);
   const [loading, setLoading] = useState(false);
-  const {themeBgStyle, themeFontStyle, _handleAnimation} = getTheme(themeIndex);
-  // Theme ==================
-
-  const [summonerText, setSummonerText] = useState('');
+  const [summonerText, setSummonerText] = useState('피터파커');
   const {data} = route.params;
 
   const disabledBtn = summonerText ? false : true;
@@ -116,35 +111,37 @@ function Join({route, navigation}) {
     const championMastery = await getChampionMastery(id);
 
     // 소환사 정보 DB 저장
-    await axiosController({
-      method: 'post',
-      url: '/users',
-      data: {
-        userData: data,
-        accountId,
-        id,
-        name,
-        profileIconId,
-        puuid,
-        revisionDate,
-        summonerLevel,
-        wins,
-        losses,
-        rank,
-        tier,
-        championMastery,
-      },
-    });
+    try {
+      await axiosController({
+        method: 'post',
+        url: '/users',
+        data: {
+          userData: data,
+          accountId,
+          id,
+          name,
+          profileIconId,
+          puuid,
+          revisionDate,
+          summonerLevel,
+          wins,
+          losses,
+          rank,
+          tier,
+          championMastery,
+        },
+      });
+    } catch (error) {
+    } finally {
+      setLoading(false);
+    }
 
-    setLoading(false);
+    EncryptedStorage.setItem('accessToken', data.accessToken);
+    dispatch(userSlice.actions.setUser({data}));
   };
 
   return (
     <JoinView
-      themeIndex={themeIndex}
-      _handleAnimation={_handleAnimation}
-      themeBgStyle={themeBgStyle}
-      themeFontStyle={themeFontStyle}
       _handleSummoner={_handleSummoner}
       setSummonerText={setSummonerText}
       disabledBtn={disabledBtn}

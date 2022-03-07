@@ -11,17 +11,11 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import {styles} from '../assets';
+import {Container, DefaultText} from '../assets/theme';
 
-function AuthView({
-  themeIndex,
-  themeFontStyle,
-  themeBgStyle,
-  _handleAnimation,
-  _handleKaKaoOauth,
-  loading,
-}) {
+function AuthView({_handleKaKaoOauth, loading}) {
   return (
-    <Animated.View style={[styles.safeConatiner, themeBgStyle]}>
+    <Container style={[styles.safeConatiner]}>
       <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
         <Image
           style={styles.homeLogo}
@@ -30,9 +24,9 @@ function AuthView({
           }}
         />
         <View style={{marginTop: 24}}>
-          <Animated.Text style={styles.bigText}>
+          <DefaultText style={styles.bigText}>
             티어 올리는 지름길 위캔듀오
-          </Animated.Text>
+          </DefaultText>
         </View>
         <TouchableOpacity
           onPress={_handleKaKaoOauth}
@@ -52,7 +46,7 @@ function AuthView({
           )}
         </TouchableOpacity>
       </View>
-    </Animated.View>
+    </Container>
   );
 }
 
