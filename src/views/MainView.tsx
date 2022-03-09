@@ -1,10 +1,11 @@
 import React from 'react';
-import {FlatList, Image, View} from 'react-native';
+import {View} from 'react-native';
 import {Container, DefaultText, Wrapper, DefaultLabel} from '../assets/theme';
 import SelectDropdown from 'react-native-select-dropdown';
 import styled from 'styled-components';
 import styles from '../assets/styles';
 import PositionComponent from '../components/PositionItem';
+
 const SearchContainer = styled.View`
   padding: 12px;
   height: 88%;

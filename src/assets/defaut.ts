@@ -36,4 +36,16 @@ function empty(value) {
   }
 }
 
-export {getTimeKor, empty};
+function getPositionKor(position) {
+  let name = {
+    TOP: '탑',
+    JUNGLE: '정글',
+    MIDDLE: '미드',
+    ADC: '원딜',
+    SUPPORT: '서포터',
+  };
+
+  return name[position] || position;
+}
+
+export {getTimeKor, empty, getPositionKor};

@@ -20,7 +20,7 @@ function ArticleListItem({index, item}) {
   );
 }
 
-function ArticleView({loading}) {
+function ArticleView({navigation, loading}) {
   const data = [
     {id: 1, title: 'zzz', body: 'aaafsfs'},
     {id: 2, title: 'zzz', body: 'aaafsfs'},
@@ -36,6 +36,7 @@ function ArticleView({loading}) {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            marginTop: 12,
           }}>
           <DefaultText style={{fontWeight: 'bold', fontSize: 16}}>
             전체 게시글
@@ -48,7 +49,9 @@ function ArticleView({loading}) {
             renderItem={ArticleListItem}
           />
         </View>
-        <CreateArticleButton activeOpacity={0.7}>
+        <CreateArticleButton
+          onPress={() => navigation.navigate('ArticleWrite')}
+          activeOpacity={0.7}>
           <Text style={{color: 'white'}}>+</Text>
         </CreateArticleButton>
       </Wrapper>

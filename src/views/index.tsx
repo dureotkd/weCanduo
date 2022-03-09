@@ -4,6 +4,7 @@ import MainView from './MainView';
 import ArticleView from './ArticleView';
 import SummonerAuthView from './SummonerAuthView';
 import ProfileView from './ProfileView';
+import ArticleWriteView from './ArticleWriteView';
 
 export {
   AuthView,
@@ -11,5 +12,6 @@ export {
   JoinView,
   MainView,
   ArticleView,
+  ArticleWriteView,
   ProfileView,
 };

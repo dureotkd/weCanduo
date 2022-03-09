@@ -1,5 +1,6 @@
 import React from 'react';
 import {Image, View} from 'react-native';
+import {getPositionKor} from '../assets/defaut';
 import {DefaultText} from '../assets/theme';
 function PositionItem({position}) {
   return (
@@ -7,6 +8,7 @@ function PositionItem({position}) {
       style={{
         flexDirection: 'row',
         alignItems: 'center',
+        marginLeft: 6,
       }}>
       <Image
         style={{width: 30, height: 30}}
@@ -15,7 +17,7 @@ function PositionItem({position}) {
         }}
       />
       <View style={{marginLeft: 6}}>
-        <DefaultText>{position}</DefaultText>
+        <DefaultText>{getPositionKor(position)}</DefaultText>
       </View>
     </View>
   );

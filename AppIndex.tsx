@@ -15,7 +15,14 @@ import EncryptedStorage from 'react-native-encrypted-storage';
 import axiosController from './src/api/axiosController';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {Auth, Join, Main, Article, Profile} from './src/controllers';
+import {
+  Auth,
+  Join,
+  Main,
+  Article,
+  Profile,
+  ArticleStack,
+} from './src/controllers';
 import {styles} from './src/assets';
 import {theme, DefaultText} from './src/assets/theme';
 import {ThemeProvider} from 'styled-components';
@@ -23,13 +30,13 @@ import {userSlice, summonerSlice} from './src/slices';
 import {empty} from './src/assets/defaut';
 import TabBarIconComponent from './src/components/TabBarIcon';
 import {AxiosError} from 'axios';
+import BottomSheet from './src/components/BottomSheet';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 function AppIndex() {
   const dispatch = useDispatch();
-
   // 접근토큰
   const accessToken = useSelector(state => state.user.accessToken);
 
@@ -40,6 +47,7 @@ function AppIndex() {
   const themeIndex = useSelector(state => state.theme.flag);
   const resTheme = theme[themeIndex ? 'light' : 'dark'];
 
+  const [modalVisible, setModalVisible] = useState(false);
   let [searchSecond, setSearchSecond] = useState(1);
   let [searchSecondText, setSearchSecondText] = useState('00:00');
   let [searchInterval, setSearchInterval] = useState({});
@@ -56,6 +64,8 @@ function AppIndex() {
           timmerArr[0],
           timmerArr[1] + searchSecond,
         );
+
+        if (searchSecond === 10) setModalVisible(true);
 
         let newMin = nowDate.getMinutes();
         let newSec = nowDate.getSeconds();
@@ -78,7 +88,7 @@ function AppIndex() {
       setSearchSecond(1);
       setSearchSecondText('00:00');
     }
-  }, [summoner.searchIng]);
+  }, [dispatch, summoner.searchIng]);
 
   useEffect(() => {
     getSearch();
@@ -118,122 +128,128 @@ function AppIndex() {
 
   return (
     <ThemeProvider theme={resTheme}>
-      <NavigationContainer>
-        <StatusBar barStyle={themeIndex ? 'dark-content' : 'light-content'} />
-        {accessToken ? (
-          <Tab.Navigator
-            screenOptions={({route}) => ({
-              tabBarShowLabel: false,
-              tabBarStyle: {
-                borderTopWidth: 0,
-                height: 60,
-                elevation: 0,
-                shadowOpacity: 0,
-                backgroundColor: themeIndex ? 'white' : 'black',
-              },
-              tabBarIcon: ({focused, color, size}) => {
-                return (
-                  <TabBarIconComponent
-                    route={route}
-                    focused={focused}
-                    color={color}
-                    size={size}
-                  />
-                );
-              },
-              headerTitle: '',
-              headerStyle: {
-                borderBottomWidth: 1,
-                borderBottomColor: '#b3863a',
-                elevation: 0,
-                shadowOpacity: 0,
-                height: Platform.OS === 'ios' ? 110 : 80,
-                backgroundColor: themeIndex ? 'white' : 'black',
-              },
-              headerLeft: () => {
-                return (
-                  <View style={[styles.rowCenter]}>
-                    <ImageBackground
-                      style={{
-                        width: 50,
-                        height: 50,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                      }}
-                      source={{
-                        uri: `https://opgg-static.akamaized.net/images/borders2/${summoner.tier.toLowerCase()}.png`,
-                      }}>
-                      <Image
+      <>
+        <NavigationContainer>
+          <StatusBar barStyle={themeIndex ? 'dark-content' : 'light-content'} />
+          {accessToken ? (
+            <Tab.Navigator
+              screenOptions={({route}) => ({
+                tabBarShowLabel: false,
+                tabBarStyle: {
+                  borderTopWidth: 0,
+                  height: 60,
+                  elevation: 0,
+                  shadowOpacity: 0,
+                  backgroundColor: themeIndex ? 'white' : 'black',
+                },
+                tabBarIcon: ({focused, color, size}) => {
+                  return (
+                    <TabBarIconComponent
+                      route={route}
+                      focused={focused}
+                      color={color}
+                      size={size}
+                    />
+                  );
+                },
+                headerTitle: '',
+                headerStyle: {
+                  borderBottomWidth: 1,
+                  borderBottomColor: '#b3863a',
+                  elevation: 0,
+                  shadowOpacity: 0,
+                  height: Platform.OS === 'ios' ? 110 : 80,
+                  backgroundColor: themeIndex ? 'white' : 'black',
+                },
+                headerLeft: () => {
+                  return (
+                    <View style={[styles.rowCenter]}>
+                      <ImageBackground
                         style={{
-                          width: 40,
-                          height: 40,
+                          width: 50,
+                          height: 50,
+                          justifyContent: 'center',
+                          alignItems: 'center',
                         }}
                         source={{
-                          uri: `https://z.fow.kr/profile/${summoner.profileIconId}.png`,
-                        }}
-                      />
-                    </ImageBackground>
-                    <View style={{marginLeft: 6}}>
-                      <View>
-                        <DefaultText
-                          style={[
-                            {
-                              fontWeight: 'bold',
-                              fontSize: 16,
-                            },
-                          ]}>
-                          {summoner.name}
-                        </DefaultText>
-                      </View>
-                      <View style={{flexDirection: 'row', marginTop: 3}}>
-                        <DefaultText style={{marginRight: 6}}>
-                          {summoner.tier}
-                        </DefaultText>
-                        <DefaultText>{summoner.rank}</DefaultText>
-                        {summoner.searchIng ? (
-                          <View style={{marginLeft: 8}}>
-                            <DefaultText>{searchSecondText}</DefaultText>
-                          </View>
-                        ) : null}
+                          uri: `https://opgg-static.akamaized.net/images/borders2/${summoner.tier.toLowerCase()}.png`,
+                        }}>
+                        <Image
+                          style={{
+                            width: 40,
+                            height: 40,
+                          }}
+                          source={{
+                            uri: `https://z.fow.kr/profile/${summoner.profileIconId}.png`,
+                          }}
+                        />
+                      </ImageBackground>
+                      <View style={{marginLeft: 6}}>
+                        <View>
+                          <DefaultText
+                            style={[
+                              {
+                                fontSize: 16,
+                                fontWeight: 'bold',
+                              },
+                            ]}>
+                            {summoner.name}
+                          </DefaultText>
+                        </View>
+                        <View style={{flexDirection: 'row', marginTop: 3}}>
+                          <DefaultText style={{marginRight: 6}}>
+                            {summoner.tier}
+                          </DefaultText>
+                          <DefaultText>{summoner.rank}</DefaultText>
+                          {summoner.searchIng ? (
+                            <View style={{marginLeft: 8}}>
+                              <DefaultText>{searchSecondText}</DefaultText>
+                            </View>
+                          ) : null}
+                        </View>
                       </View>
                     </View>
-                  </View>
-                );
-              },
-              headerRight: () => {
-                return (
-                  <TouchableOpacity style={{padding: 10}}>
-                    <MaterialCommunityIcons
-                      name="bell"
-                      size={23}
-                      style={{
-                        color: themeIndex ? 'black' : 'white',
-                        marginRight: 15,
-                      }}
-                    />
-                    <DefaultText>{summoner.searchIng}</DefaultText>
-                  </TouchableOpacity>
-                );
-              },
-            })}>
-            <Tab.Screen name="Main" component={Main} />
-            <Tab.Screen name="Article" component={Article} />
-            <Stack.Screen name="Profile" component={Profile} />
-          </Tab.Navigator>
-        ) : (
-          <Stack.Navigator
-            initialRouteName="Auth"
-            screenOptions={{
-              headerShown: false,
-              gestureEnabled: true,
-              presentation: 'transparentModal',
-              animationTypeForReplace: 'push',
-            }}>
-            <Stack.Screen name="Auth" component={Auth} />
-            <Stack.Screen name="Join" component={Join} />
-          </Stack.Navigator>
-        )}
-      </NavigationContainer>
+                  );
+                },
+                headerRight: () => {
+                  return (
+                    <TouchableOpacity style={{padding: 10}}>
+                      <MaterialCommunityIcons
+                        name="bell"
+                        size={23}
+                        style={{
+                          color: themeIndex ? 'black' : 'white',
+                          marginRight: 15,
+                        }}
+                      />
+                      <DefaultText>{summoner.searchIng}</DefaultText>
+                    </TouchableOpacity>
+                  );
+                },
+              })}>
+              <Tab.Screen name="Main" component={Main} />
+              <Tab.Screen name="Article" component={ArticleStack} />
+              <Stack.Screen name="Profile" component={Profile} />
+            </Tab.Navigator>
+          ) : (
+            <Stack.Navigator
+              initialRouteName="Auth"
+              screenOptions={{
+                headerShown: false,
+                gestureEnabled: true,
+                presentation: 'transparentModal',
+                animationTypeForReplace: 'push',
+              }}>
+              <Stack.Screen name="Auth" component={Auth} />
+              <Stack.Screen name="Join" component={Join} />
+            </Stack.Navigator>
+          )}
+        </NavigationContainer>
+        <BottomSheet
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
+        />
+      </>
     </ThemeProvider>
   );
 }
