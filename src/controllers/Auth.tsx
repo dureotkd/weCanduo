@@ -8,10 +8,6 @@ import {
 } from '@react-native-seoul/kakao-login';
 import React, {useState} from 'react';
 import {AuthView} from '../views';
-import {useDispatch, useSelector} from 'react-redux';
-import {userSlice} from '../slices';
-import axiosController from '../api/axiosController';
-import EncryptedStorage from 'react-native-encrypted-storage';
 
 function Auth({navigation}) {
   const [loading, setLoading] = useState(false);

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {JoinView} from '../views';
 import axiosController from '../api/axiosController';
@@ -15,6 +15,8 @@ import EncryptedStorage from 'react-native-encrypted-storage';
 
 function Join({route, navigation}) {
   const dispatch = useDispatch();
+
+  const [inputRef, setInputRef] = useRef('');
   const [loading, setLoading] = useState(false);
   const [summonerText, setSummonerText] = useState('피터파커');
   const {data} = route.params;
@@ -36,7 +38,7 @@ function Join({route, navigation}) {
         })
         .catch(e => {
           setLoading(false);
-          Alert.alert('알림', '존재하지 않는 소환사명입니다');
+          Alert.alert('알림', '존재하지 않는 소환사명입니다..');
           reject();
         });
     });
@@ -131,13 +133,17 @@ function Join({route, navigation}) {
           championMastery,
         },
       });
+
+      await EncryptedStorage.setItem('accessToken', data.accessToken);
+      dispatch(
+        userSlice.actions.setAccessToken({
+          accessToken: data.accessToken,
+        }),
+      );
     } catch (error) {
     } finally {
       setLoading(false);
     }
-
-    EncryptedStorage.setItem('accessToken', data.accessToken);
-    dispatch(userSlice.actions.setUser({data}));
   };
 
   return (
@@ -147,6 +153,7 @@ function Join({route, navigation}) {
       disabledBtn={disabledBtn}
       navigation={navigation}
       loading={loading}
+      inputRef={inputRef}
     />
   );
 }

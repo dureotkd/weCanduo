@@ -16,7 +16,7 @@ class UserModel extends Core {
     const value = Object.values(obj)[0];
     const sql = `
     SELECT 
-      * 
+      *  
     FROM 
       lolDuo.${this.table} a,
       lolDuo.summoner b
@@ -24,8 +24,6 @@ class UserModel extends Core {
       a.id = b.userId
     AND
       a.${column} = '${value}'`;
-
-    console.log(sql);
 
     const row = this.core.excute({
       database: 'lolDuo',

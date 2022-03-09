@@ -16,6 +16,7 @@ function JoinView({
   setSummonerText,
   navigation,
   loading,
+  inputRef,
 }) {
   return (
     <Container>
@@ -26,6 +27,7 @@ function JoinView({
         <TextInput
           onChangeText={text => setSummonerText(text)}
           style={styles.textInput}
+          ref={inputRef}
           placeholder="소환사명 입력"
         />
         <TouchableOpacity

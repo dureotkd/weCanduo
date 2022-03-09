@@ -40,8 +40,6 @@ router.get('/users', async (req, res) => {
     accessToken,
   });
 
-  console.log(user);
-
   res.send({user});
 });
 
@@ -62,7 +60,13 @@ router.post('/users', async (req, res) => {
     championMastery,
   } = req.body;
 
-  const userInserId = await userModel.save({
+  const userRow = await userModel.getRow({
+    email: userData.email,
+  });
+
+  const procType = userRow ? 'UPDATE' : 'INSERT';
+
+  let userAsyncData = {
     nickname: userData.nickname,
     profileImageUrl: userData.profileImageUrl,
     email: userData.email,
@@ -70,11 +74,10 @@ router.post('/users', async (req, res) => {
     refreshToken: userData.refreshToken,
     accessTokenExpiresAt: userData.accessTokenExpiresAt,
     refreshTokenExpiresAt: userData.refreshTokenExpiresAt,
-  });
+  };
 
-  await summonerModel.save({
+  let summonerAsyncData = {
     accountId,
-    userId: userInserId,
     lolId: id,
     name,
     profileIconId,
@@ -84,7 +87,25 @@ router.post('/users', async (req, res) => {
     losses,
     rank,
     tier,
-  });
+  };
+
+  switch (procType) {
+    case 'INSERT':
+      var lastInsertId = await userModel.save(userAsyncData);
+      summonerAsyncData.userId = lastInsertId;
+      await summonerModel.save(summonerAsyncData);
+
+      break;
+
+    case 'UPDATE':
+      const summonerWhere = [`userId = ${userData.id}`];
+      const userWhere = [`email = ${userData.email}`];
+
+      await userModel.update(userAsyncData, userWhere);
+      await summonerModel.update(summonerAsyncData, summonerWhere);
+
+      break;
+  }
 
   res.status(201).send({success: true});
 
@@ -93,4 +114,20 @@ router.post('/users', async (req, res) => {
   // } else {
   //   res.status(400).send({success: false});
   // }
+});
+
+router.post('/search', async (req, res) => {
+  const {userSeq, preferPosition, myPosition} = req.body;
+
+  console.log(userSeq);
+
+  res.status(201).send({success: true});
+});
+
+router.delete('/search', async (req, res) => {
+  const {userSeq, preferPosition, myPosition} = req.body;
+
+  console.log(userSeq);
+
+  res.send({success: true});
 });

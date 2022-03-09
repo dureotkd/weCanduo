@@ -12,6 +12,9 @@ const userSlice = createSlice({
   name: 'user`',
   initialState,
   reducers: {
+    setAccessToken(state, action) {
+      state.accessToken = action.payload.accessToken;
+    },
     setUser(state, action) {
       state.email = action.payload.data.email;
       state.nickname = action.payload.data.nickname;

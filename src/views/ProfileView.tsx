@@ -1,29 +1,12 @@
 import React from 'react';
-import {Animated, Switch, SafeAreaView} from 'react-native';
-import styled from 'styled-components';
-
-const Container = styled.View`
-  flex: 1;
-  background-color: ${({theme}) => {
-    return theme.bgColor;
-  }};
-`;
-
-const DefaultText = styled.Text`
-  color: ${({theme}) => {
-    return theme.color;
-  }};
-`;
+import {Container, DefaultText, Wrapper} from '../assets/theme';
 
 function ProfileView({loading}) {
   return (
     <Container>
-      <SafeAreaView>
+      <Wrapper>
         <DefaultText>ProfileView</DefaultText>
-        <DefaultText>ProfileView</DefaultText>
-        <DefaultText>ProfileView</DefaultText>
-        <DefaultText>ProfileView</DefaultText>
-      </SafeAreaView>
+      </Wrapper>
     </Container>
   );
 }

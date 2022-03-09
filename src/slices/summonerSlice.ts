@@ -10,6 +10,8 @@ const initialState = {
   wins: 0,
   losses: 0,
   tier: '',
+  rank: '',
+  searchIng: '',
 };
 
 const summonerSlice = createSlice({
@@ -26,6 +28,11 @@ const summonerSlice = createSlice({
       state.wins = action.payload.data.wins;
       state.losses = action.payload.data.losses;
       state.tier = action.payload.data.tier;
+      state.rank = action.payload.data.rank;
+    },
+
+    setSearchIng(state, action) {
+      state.searchIng = action.payload.searchIng;
     },
   },
   extraReducers: _builder => {},

@@ -94,6 +94,22 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: 'black',
   },
+  defaultSelect: {
+    backgroundColor: '#484848',
+    color: 'white',
+    borderRadius: 3,
+    height: 40,
+    marginTop: 10,
+    marginBottom: 20,
+    width: 120,
+  },
+  articleList: {
+    borderColor: '#4b4a4a',
+    borderTopWidth: 1,
+    paddingLeft: 12,
+    paddingTop: 12,
+    paddingBottom: 30,
+  },
 });
 
 export default styles;

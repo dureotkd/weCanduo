@@ -20,6 +20,11 @@ const Container = styled.SafeAreaView`
   }};
 `;
 
+const Wrapper = styled.View`
+  padding: 16px;
+  flex: 1;
+`;
+
 const ContainerPressable = styled.Pressable`
   flex: 1;
   justify-content: center;
@@ -33,4 +38,29 @@ const DefaultText = styled.Text`
   }};
 `;
 
-export {theme, Container, DefaultText, ContainerPressable};
+const DefaultLabel = styled.Text`
+  color: #b4b1b1;
+`;
+
+const CreateArticleButton = styled.TouchableOpacity`
+  position: absolute;
+  right: 30px;
+  bottom: 40px;
+  background-color: #b3863a;
+  border-radius: 50px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export {
+  theme,
+  Container,
+  DefaultText,
+  ContainerPressable,
+  DefaultLabel,
+  Wrapper,
+  CreateArticleButton,
+};
