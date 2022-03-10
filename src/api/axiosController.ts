@@ -1,12 +1,12 @@
-import axios from 'axios';
+import axios, {AxiosError} from 'axios';
 import {Alert} from 'react-native';
 import Config from 'react-native-config';
 
 const timeout = 2500;
 const instance = axios.create({
-  // baseURL: `http://192.168.35.217:8090/api`,
+  baseURL: `http://192.168.35.217:8090/api`,
   // baseURL: `http://10.0.2.16:8090/api`,
-  baseURL: `http://127.0.0.1:8090/api`,
+  // baseURL: `http://127.0.0.1:8090/api`,
   // baseURL: `http://10.0.2.15:8090/api`,
   timeout: timeout,
   headers: {
@@ -23,12 +23,11 @@ instance.interceptors.request.use(
 
   // 요청 에러 발생시 수행로직
   error => {
-    Alert.alert('알림', 'REQUEST ERROR 발생');
+    Alert.alert('알림', '서버에러');
 
     return Promise.reject(error);
   },
 );
-
 // 응답 인터셉션 추
 instance.interceptors.response.use(
   // 응답 로직 생성
@@ -40,7 +39,7 @@ instance.interceptors.response.use(
 
   // 응답 에러
   error => {
-    Alert.alert('알림', 'RESPONESE ERROR 발생');
+    Alert.alert('알림', '서버 에러');
 
     return Promise.reject(error);
   },

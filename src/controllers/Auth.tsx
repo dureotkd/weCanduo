@@ -12,12 +12,14 @@ import {AuthView} from '../views';
 function Auth({navigation}) {
   const [loading, setLoading] = useState(false);
 
+  console.log(navigation);
   // Theme ==================
 
   const _handleKaKaoOauth = async () => {
-    setLoading(true);
+    // setLoading(true);
 
     const tokenData = await getOauthTokenData();
+
     const profile = await getKaKaoProfileData();
 
     if (tokenData) {
@@ -52,7 +54,7 @@ function Auth({navigation}) {
       const res = await kakaoLogin();
       return res;
     } catch (e) {
-      console.log(`oauth ${e}`);
+      console.log(`oauth kakaoLogin ${e}`);
       return false;
     }
   };

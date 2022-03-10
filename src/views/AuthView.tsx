@@ -11,13 +11,14 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import {styles} from '../assets';
+import FastImage from 'react-native-fast-image';
 import {Container, DefaultText} from '../assets/theme';
 
 function AuthView({_handleKaKaoOauth, loading}) {
   return (
     <Container style={[styles.safeConatiner]}>
       <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
-        <Image
+        <FastImage
           style={styles.homeLogo}
           source={{
             uri: 'https://www.pcgamesn.com/wp-content/uploads/2021/03/league-of-legends-group.jpg',
@@ -37,7 +38,7 @@ function AuthView({_handleKaKaoOauth, loading}) {
             <ActivityIndicator color="black" />
           ) : (
             <View style={styles.spaceRow}>
-              <Image
+              <FastImage
                 style={styles.kakaoImg}
                 source={{uri: 'https://imki123.github.io/images/kakao.png'}}
               />

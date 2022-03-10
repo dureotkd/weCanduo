@@ -7,10 +7,7 @@ import {Alert} from 'react-native';
 
 function Article({navigation}) {
   const dispatch = useDispatch();
-  const themeIndex = useSelector(state => state.theme.flag);
   const [loading, setLoading] = useState(false);
-
-  useLayoutEffect(() => {}, []);
 
   const getArticle = useCallback(() => {}, [dispatch]);
   useEffect(() => {
@@ -18,7 +15,6 @@ function Article({navigation}) {
   }, []);
 
   // Theme ==================
-
   return <ArticleView loading={loading} navigation={navigation} />;
 }
 

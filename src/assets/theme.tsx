@@ -42,6 +42,14 @@ const DefaultLabel = styled.Text`
   color: #b4b1b1;
 `;
 
+const DefaultTextInput = styled.TextInput`
+  color: white;
+  width: 120px;
+  height: 59px;
+  border-bottom-width: 1px;
+  border-bottom-color: #fff;
+`;
+
 const CreateArticleButton = styled.TouchableOpacity`
   position: absolute;
   right: 30px;
@@ -63,4 +71,5 @@ export {
   DefaultLabel,
   Wrapper,
   CreateArticleButton,
+  DefaultTextInput,
 };

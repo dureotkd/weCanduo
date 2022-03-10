@@ -9,19 +9,23 @@ import {
   leagueUrl,
   championMasteryUrl,
 } from '../api/leagueApi';
-import {Alert, ActivityIndicator} from 'react-native';
+import {Alert, ActivityIndicator, View} from 'react-native';
 import {userSlice, summonerSlice} from '../slices';
 import EncryptedStorage from 'react-native-encrypted-storage';
 
 function Join({route, navigation}) {
   const dispatch = useDispatch();
 
-  const [inputRef, setInputRef] = useRef('');
+  const inputRef = useRef();
   const [loading, setLoading] = useState(false);
-  const [summonerText, setSummonerText] = useState('피터파커');
+  const [summonerText, setSummonerText] = useState('');
   const {data} = route.params;
 
   const disabledBtn = summonerText ? false : true;
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
 
   const getSummoner = async () => {
     return new Promise((resolve, reject) => {

@@ -104,8 +104,6 @@ const styles = StyleSheet.create({
     width: 120,
   },
   articleList: {
-    borderColor: '#4b4a4a',
-    borderTopWidth: 1,
     paddingLeft: 12,
     paddingTop: 12,
     paddingBottom: 30,

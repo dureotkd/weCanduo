@@ -1,18 +1,27 @@
-import React, {useCallback, useEffect, useLayoutEffect, useState} from 'react';
-import {ArticleWriteView} from '../views';
+import React, {
+  Suspense,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useState,
+} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {userSlice} from '../slices';
-import axiosController from '../api/axiosController';
-import {Alert} from 'react-native';
+import Loading from '../components/Loading';
+const ArticleWriteView = React.lazy(() => import('../views/ArticleWriteView'));
 
 function ArticleWrite({navigation}) {
   const dispatch = useDispatch();
-  const themeIndex = useSelector(state => state.theme.flag);
   const [loading, setLoading] = useState(false);
 
   // Theme ==================
 
-  return <ArticleWriteView loading={loading} navigation={navigation} />;
+  useEffect(() => {}, []);
+
+  return (
+    <Suspense fallback={<Loading />}>
+      <ArticleWriteView loading={loading} navigation={navigation} />
+    </Suspense>
+  );
 }
 
 export default ArticleWrite;

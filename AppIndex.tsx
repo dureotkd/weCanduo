@@ -1,36 +1,25 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {lazy, useCallback, useEffect, useState} from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {TouchableOpacity, View, StatusBar, Platform} from 'react-native';
 import {
-  TouchableOpacity,
-  View,
-  StatusBar,
-  Alert,
-  ImageBackground,
-  Image,
-  Platform,
-} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
+  DarkTheme,
+  DefaultTheme,
+  NavigationContainer,
+} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import axiosController from './src/api/axiosController';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {
-  Auth,
-  Join,
-  Main,
-  Article,
-  Profile,
-  ArticleStack,
-} from './src/controllers';
+import {Auth, Join, Main, Profile, ArticleStack} from './src/controllers';
 import {styles} from './src/assets';
 import {theme, DefaultText} from './src/assets/theme';
 import {ThemeProvider} from 'styled-components';
 import {userSlice, summonerSlice} from './src/slices';
 import {empty} from './src/assets/defaut';
 import TabBarIconComponent from './src/components/TabBarIcon';
-import {AxiosError} from 'axios';
 import BottomSheet from './src/components/BottomSheet';
+import FastImage from 'react-native-fast-image';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -115,10 +104,7 @@ function AppIndex() {
           dispatch(summonerSlice.actions.setSummoner({data: data.user}));
           dispatch(userSlice.actions.setUser({data: data.user}));
         }
-      } catch (e) {
-        console.log(e as AxiosError);
-        Alert.alert('알림', '서버 통신 오류!');
-      }
+      } catch (e) {}
     }
   }, [dispatch]);
 
@@ -129,7 +115,7 @@ function AppIndex() {
   return (
     <ThemeProvider theme={resTheme}>
       <>
-        <NavigationContainer>
+        <NavigationContainer theme={themeIndex ? DefaultTheme : DarkTheme}>
           <StatusBar barStyle={themeIndex ? 'dark-content' : 'light-content'} />
           {accessToken ? (
             <Tab.Navigator
@@ -164,7 +150,7 @@ function AppIndex() {
                 headerLeft: () => {
                   return (
                     <View style={[styles.rowCenter]}>
-                      <ImageBackground
+                      <FastImage
                         style={{
                           width: 50,
                           height: 50,
@@ -174,7 +160,7 @@ function AppIndex() {
                         source={{
                           uri: `https://opgg-static.akamaized.net/images/borders2/${summoner.tier.toLowerCase()}.png`,
                         }}>
-                        <Image
+                        <FastImage
                           style={{
                             width: 40,
                             height: 40,
@@ -183,7 +169,7 @@ function AppIndex() {
                             uri: `https://z.fow.kr/profile/${summoner.profileIconId}.png`,
                           }}
                         />
-                      </ImageBackground>
+                      </FastImage>
                       <View style={{marginLeft: 6}}>
                         <View>
                           <DefaultText

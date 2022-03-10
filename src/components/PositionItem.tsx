@@ -2,6 +2,7 @@ import React from 'react';
 import {Image, View} from 'react-native';
 import {getPositionKor} from '../assets/defaut';
 import {DefaultText} from '../assets/theme';
+import FastImage from 'react-native-fast-image';
 function PositionItem({position}) {
   return (
     <View
@@ -10,7 +11,7 @@ function PositionItem({position}) {
         alignItems: 'center',
         marginLeft: 6,
       }}>
-      <Image
+      <FastImage
         style={{width: 30, height: 30}}
         source={{
           uri: `https://raw.githubusercontent.com/davidherasp/lol_images/master/role_lane_icons/${position}.png`,
