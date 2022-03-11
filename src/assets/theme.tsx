@@ -44,10 +44,18 @@ const DefaultLabel = styled.Text`
 
 const DefaultTextInput = styled.TextInput`
   color: white;
-  width: 120px;
-  height: 59px;
-  border-bottom-width: 1px;
-  border-bottom-color: #fff;
+  width: 100%;
+  height: 35px;
+  padding-bottom: 6px;
+  border-width: 1px;
+  border-color: #fff;
+  border-radius: 4px;
+  padding: 6px;
+  flex-shrink: 1;
+`;
+
+const DefaultInputLabel = styled.Text`
+  color: white;
 `;
 
 const CreateArticleButton = styled.TouchableOpacity`
@@ -63,13 +71,26 @@ const CreateArticleButton = styled.TouchableOpacity`
   justify-content: center;
 `;
 
+const DefaultButton = styled.TouchableOpacity`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${({color}) => {
+    return color;
+  }};
+  height: 40px;
+  border-radius: 4px;
+`;
+
 export {
   theme,
   Container,
   DefaultText,
   ContainerPressable,
-  DefaultLabel,
   Wrapper,
   CreateArticleButton,
+  DefaultLabel,
   DefaultTextInput,
+  DefaultInputLabel,
+  DefaultButton,
 };

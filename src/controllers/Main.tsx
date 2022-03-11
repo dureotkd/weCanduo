@@ -5,6 +5,7 @@ import {userSlice, summonerSlice} from '../slices';
 import axiosController from '../api/axiosController';
 import {Alert} from 'react-native';
 import axios from 'axios';
+import {searchPositionDefault} from '../assets/defaut';
 
 function Main({navigation}) {
   const dispatch = useDispatch();
@@ -12,7 +13,6 @@ function Main({navigation}) {
     return state.summoner;
   });
 
-  const searchPositionDefault = ['TOP', 'JUNGLE', 'MIDDLE', 'ADC', 'SUPPORT'];
   const [loading, setLoading] = useState(false);
   const [preferPosition, setPreferPosition] = useState('');
   const [myPosition, setMyPosition] = useState('');

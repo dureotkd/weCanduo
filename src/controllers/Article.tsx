@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {userSlice} from '../slices';
 import axiosController from '../api/axiosController';
 import {Alert} from 'react-native';
+import {searchPositionDefault} from '../assets/defaut';
 
 function Article({navigation}) {
   const dispatch = useDispatch();

@@ -23,6 +23,8 @@ function getTimeKor(value) {
   return `${Math.floor(betweenTimeDay / 365)}년전`;
 }
 
+const searchPositionDefault = ['TOP', 'JUNGLE', 'MIDDLE', 'ADC', 'SUPPORT'];
+
 function empty(value) {
   if (
     value == '' ||
@@ -48,4 +50,4 @@ function getPositionKor(position) {
   return name[position] || position;
 }
 
-export {getTimeKor, empty, getPositionKor};
+export {getTimeKor, empty, getPositionKor, searchPositionDefault};

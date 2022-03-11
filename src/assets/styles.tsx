@@ -108,6 +108,12 @@ const styles = StyleSheet.create({
     paddingTop: 12,
     paddingBottom: 30,
   },
+  tabBartStyle: {
+    borderTopWidth: 0,
+    height: 60,
+    elevation: 0,
+    shadowOpacity: 0,
+  },
 });
 
 export default styles;

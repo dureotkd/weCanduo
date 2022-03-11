@@ -1,27 +1,16 @@
 import React from 'react';
 import {View} from 'react-native';
-import {Container, DefaultText, Wrapper, DefaultLabel} from '../assets/theme';
+import {
+  Container,
+  DefaultText,
+  Wrapper,
+  DefaultLabel,
+  DefaultButton,
+} from '../assets/theme';
 import SelectDropdown from 'react-native-select-dropdown';
 import styled from 'styled-components';
 import styles from '../assets/styles';
 import PositionComponent from '../components/PositionItem';
-
-const SearchContainer = styled.View`
-  padding: 12px;
-  height: 88%;
-`;
-
-const SearchButton = styled.TouchableOpacity`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 14px;
-  background-color: ${({color}) => {
-    return color;
-  }};
-  height: 40px;
-  border-radius: 4px;
-`;
 
 function MainView({
   loading,
@@ -35,7 +24,7 @@ function MainView({
   return (
     <Container>
       <Wrapper>
-        <SearchContainer>
+        <View style={{padding: 12, height: '88%'}}>
           <View>
             <DefaultText>빠르고 완벽한 자동매칭</DefaultText>
             <DefaultText>티어를 올리다</DefaultText>
@@ -87,21 +76,21 @@ function MainView({
               />
             </View>
           </View>
-        </SearchContainer>
+        </View>
         {!loading ? (
-          <SearchButton
+          <DefaultButton
             color="#101747"
             onPress={_handleSearchGame}
             activeOpacity={0.7}>
             <DefaultText>듀오 자동서치</DefaultText>
-          </SearchButton>
+          </DefaultButton>
         ) : (
-          <SearchButton
+          <DefaultButton
             color="#802f2f"
             onPress={_cancelSearchGame}
             activeOpacity={0.7}>
             <DefaultText>취소</DefaultText>
-          </SearchButton>
+          </DefaultButton>
         )}
       </Wrapper>
     </Container>

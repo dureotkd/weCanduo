@@ -115,17 +115,14 @@ function AppIndex() {
   return (
     <ThemeProvider theme={resTheme}>
       <>
-        <NavigationContainer theme={themeIndex ? DefaultTheme : DarkTheme}>
+        <NavigationContainer theme={DarkTheme}>
           <StatusBar barStyle={themeIndex ? 'dark-content' : 'light-content'} />
           {accessToken ? (
             <Tab.Navigator
               screenOptions={({route}) => ({
                 tabBarShowLabel: false,
                 tabBarStyle: {
-                  borderTopWidth: 0,
-                  height: 60,
-                  elevation: 0,
-                  shadowOpacity: 0,
+                  ...styles.tabBartStyle,
                   backgroundColor: themeIndex ? 'white' : 'black',
                 },
                 tabBarIcon: ({focused, color, size}) => {
