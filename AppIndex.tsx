@@ -128,7 +128,6 @@ function AppIndex() {
           />
           {accessToken ? (
             <Tab.Navigator
-              initialRouteName="Profile"
               screenOptions={({route}) => ({
                 tabBarShowLabel: false,
                 tabBarStyle: {

@@ -8,7 +8,7 @@ import {
   CreateArticleButton,
 } from '../assets/theme';
 
-function ArticleView({navigation, loading}) {
+function ArticleView({navigation, loading, articles}) {
   const data = [
     {id: 1, title: '안녕하세요', body: 'aaafsfs'},
     {id: 2, title: 'ㅋㅋㅋㅋㅋ', body: 'aaafsfs'},
@@ -51,7 +51,7 @@ function ArticleView({navigation, loading}) {
         <View style={{marginTop: 30}}>
           <FlatList
             setNativeProps={{navigation}}
-            data={data}
+            data={articles}
             keyExtractor={item => item.id}
             renderItem={ArticleListItem}
           />

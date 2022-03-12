@@ -9,14 +9,27 @@ import {searchPositionDefault} from '../assets/defaut';
 function Article({navigation}) {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  const [articles, setArticles] = useState([]);
+  const getArticle = useCallback(async () => {
+    const {data} = await axiosController({
+      url: `/articles`,
+      method: 'get',
+    });
 
-  const getArticle = useCallback(() => {}, [dispatch]);
+    setArticles(data.articles);
+  }, [dispatch]);
   useEffect(() => {
     getArticle();
-  }, []);
+  }, [getArticle]);
 
   // Theme ==================
-  return <ArticleView loading={loading} navigation={navigation} />;
+  return (
+    <ArticleView
+      loading={loading}
+      navigation={navigation}
+      articles={articles}
+    />
+  );
 }
 
 export default Article;

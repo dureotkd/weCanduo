@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 
 const userModel = require('./model/userModel');
 const summonerModel = require('./model/summonerModel');
+const articleModel = require('./model/articleModel');
 
 const app = express();
 const http = require('http').createServer(app);
@@ -117,7 +118,9 @@ router.post('/users', async (req, res) => {
 });
 
 router.post('/article', async (req, res) => {
-  const {title, body, myPosition, preferPosition} = req.body;
+  const {title, body, myPosition, searchPosition} = req.body;
+
+  console.log(title, body, myPosition, searchPosition);
 
   let ing = true;
   const validProc = [1];
@@ -138,7 +141,7 @@ router.post('/article', async (req, res) => {
       break;
     }
 
-    if (!preferPosition) {
+    if (!searchPosition) {
       ing = false;
       break;
     }
@@ -149,7 +152,18 @@ router.post('/article', async (req, res) => {
     return;
   }
 
-  res.status(201).send({});
+  const lastInsertId = await articleModel.save({
+    title,
+    body,
+    myPosition,
+    preferPosition: searchPosition,
+  });
+
+  console.log(lastInsertId);
+
+  res.status(201).send({
+    id: lastInsertId,
+  });
 });
 
 router.post('/search', async (req, res) => {
@@ -161,7 +175,13 @@ router.post('/search', async (req, res) => {
 router.delete('/search', async (req, res) => {
   const {userSeq, preferPosition, myPosition} = req.body;
 
-  console.log(userSeq);
-
   res.send({success: true});
+});
+
+router.get('/articles', async (req, res) => {
+  const articles = await articleModel.getAll();
+
+  res.send({
+    articles,
+  });
 });

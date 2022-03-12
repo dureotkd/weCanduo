@@ -39,18 +39,20 @@ function ArticleWrite({navigation}) {
   }, []);
 
   const _writeArticle = useCallback(async () => {
-    try {
-      await axiosController({
-        url: '/article',
-        method: 'post',
-        data: {
-          body,
-          title,
-          myPosition,
-          searchPosition,
-        },
-      });
-    } catch (err) {}
+    const {data} = await axiosController({
+      url: '/article',
+      method: 'post',
+      data: {
+        body,
+        title,
+        myPosition,
+        searchPosition,
+      },
+    });
+
+    navigation.navigate('ArticleDetail', {
+      id: data.id,
+    });
   }, [body, title, myPosition, searchPosition]);
 
   // Theme ==================
