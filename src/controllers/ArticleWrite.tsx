@@ -1,3 +1,4 @@
+import {AxiosError} from 'axios';
 import React, {
   Suspense,
   useCallback,
@@ -49,9 +50,7 @@ function ArticleWrite({navigation}) {
           searchPosition,
         },
       });
-    } catch (err) {
-      console.log('writeArticle', e);
-    }
+    } catch (err) {}
   }, [body, title, myPosition, searchPosition]);
 
   // Theme ==================

@@ -12,7 +12,6 @@ import {AuthView} from '../views';
 function Auth({navigation}) {
   const [loading, setLoading] = useState(false);
 
-  console.log(navigation);
   // Theme ==================
 
   const _handleKaKaoOauth = async () => {

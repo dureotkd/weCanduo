@@ -115,8 +115,6 @@ function ArticleWriteView({
           position: 'absolute',
           bottom: 0,
           width: '100%',
-          borderRadius: 25,
-          height: 70,
           backgroundColor: '#101747',
         }}>
         <DefaultText>작성</DefaultText>

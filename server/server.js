@@ -116,10 +116,44 @@ router.post('/users', async (req, res) => {
   // }
 });
 
+router.post('/article', async (req, res) => {
+  const {title, body, myPosition, preferPosition} = req.body;
+
+  let ing = true;
+  const validProc = [1];
+
+  for (const valid of validProc) {
+    if (!title) {
+      ing = false;
+      break;
+    }
+
+    if (!body) {
+      ing = false;
+      break;
+    }
+
+    if (!myPosition) {
+      ing = false;
+      break;
+    }
+
+    if (!preferPosition) {
+      ing = false;
+      break;
+    }
+  }
+
+  if (!ing) {
+    res.status(400).send({msg: '필수값 부족'});
+    return;
+  }
+
+  res.status(201).send({});
+});
+
 router.post('/search', async (req, res) => {
   const {userSeq, preferPosition, myPosition} = req.body;
-
-  console.log(userSeq);
 
   res.status(201).send({success: true});
 });

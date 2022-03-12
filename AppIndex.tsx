@@ -20,12 +20,14 @@ import {empty} from './src/assets/defaut';
 import TabBarIconComponent from './src/components/TabBarIcon';
 import BottomSheet from './src/components/BottomSheet';
 import FastImage from 'react-native-fast-image';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 function AppIndex() {
   const dispatch = useDispatch();
+
   // 접근토큰
   const accessToken = useSelector(state => state.user.accessToken);
 
@@ -79,10 +81,6 @@ function AppIndex() {
     }
   }, [dispatch, summoner.searchIng]);
 
-  useEffect(() => {
-    getSearch();
-  }, [getSearch]);
-
   const getAuthToken = useCallback(async () => {
     let resAccessToken = accessToken
       ? accessToken
@@ -90,7 +88,7 @@ function AppIndex() {
 
     resAccessToken = '1g77BSovkIH2D4OYh3dNrQ6n-7zXRpAnc888Bgo9dNoAAAF_ZQoInA';
 
-    if (resAccessToken) {
+    if (resAccessToken && !accessToken) {
       try {
         const {status, data} = await axiosController({
           method: 'get',
@@ -112,13 +110,25 @@ function AppIndex() {
     getAuthToken();
   }, [getAuthToken]);
 
+  useEffect(() => {
+    getSearch();
+  }, [getSearch]);
+
   return (
     <ThemeProvider theme={resTheme}>
       <>
-        <NavigationContainer theme={DarkTheme}>
-          <StatusBar barStyle={themeIndex ? 'dark-content' : 'light-content'} />
+        <NavigationContainer
+          onStateChange={
+            state => console.log('state Change')
+            // AsyncStorage.setItem('NAVIGATION_STATE', JSON.stringify(state))
+          }
+          theme={DarkTheme}>
+          <StatusBar
+            sbarStyle={themeIndex ? 'dark-content' : 'light-content'}
+          />
           {accessToken ? (
             <Tab.Navigator
+              initialRouteName="Profile"
               screenOptions={({route}) => ({
                 tabBarShowLabel: false,
                 tabBarStyle: {
