@@ -34,13 +34,14 @@ router.get('/users', async (req, res) => {
   const {accessToken} = req.query;
 
   if (!accessToken) {
-    req.status(404).send({success: false});
+    req.status(404).send({errorMessage: '접근토큰이 없습니다'});
   }
 
   const user = await userModel.getRow({
     accessToken,
   });
 
+  res.cookie('accessToken', accessToken, {});
   res.send({user});
 });
 
@@ -118,14 +119,17 @@ router.post('/users', async (req, res) => {
 });
 
 router.post('/article', async (req, res) => {
-  const {title, body, myPosition, searchPosition} = req.body;
-
-  console.log(title, body, myPosition, searchPosition);
+  const {title, body, myPosition, searchPosition, userSeq} = req.body;
 
   let ing = true;
   const validProc = [1];
 
   for (const valid of validProc) {
+    if (!userSeq) {
+      ing = false;
+      break;
+    }
+
     if (!title) {
       ing = false;
       break;
@@ -152,14 +156,15 @@ router.post('/article', async (req, res) => {
     return;
   }
 
+  const accessTokenCookie = req.header('cookie');
+
   const lastInsertId = await articleModel.save({
     title,
     body,
     myPosition,
     preferPosition: searchPosition,
+    userSeq,
   });
-
-  console.log(lastInsertId);
 
   res.status(201).send({
     id: lastInsertId,

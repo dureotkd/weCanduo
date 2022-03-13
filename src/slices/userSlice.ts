@@ -1,6 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
+  id: 0,
   email: '',
   nickname: '',
   profileImageUrl: '',
@@ -21,6 +22,7 @@ const userSlice = createSlice({
       state.profileImageUrl = action.payload.data.profileImageUrl;
       state.refreshToken = action.payload.data.refreshToken;
       state.accessToken = action.payload.data.accessToken;
+      state.id = action.payload.data.id;
     },
   },
   extraReducers: _builder => {},

@@ -22,6 +22,8 @@ function ArticleWriteView({
   _handleBody,
   _handleMyPosition,
   _handleSearchPosition,
+  _handleBodyRef,
+  bodyRef,
 }) {
   return (
     <Container>
@@ -53,6 +55,8 @@ function ArticleWriteView({
               <DefaultTextInput
                 onChangeText={_handleTitle}
                 style={{marginTop: 12}}
+                returnKeyType="next"
+                onSubmitEditing={_handleBodyRef}
               />
             </View>
             <View style={{marginTop: 24}}>
@@ -60,6 +64,7 @@ function ArticleWriteView({
               <DefaultTextInput
                 onChangeText={_handleBody}
                 style={{marginTop: 12, height: 180}}
+                ref={bodyRef}
                 multiline={true}
               />
             </View>

@@ -4,6 +4,7 @@ import React, {
   useCallback,
   useEffect,
   useLayoutEffect,
+  useRef,
   useState,
 } from 'react';
 import {Alert} from 'react-native';
@@ -15,12 +16,18 @@ import {ArticleWriteView} from '../views';
 
 function ArticleWrite({navigation}) {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
+  const user = useSelector(state => state.user);
 
+  const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [myPosition, setMyPosition] = useState('');
   const [searchPosition, setSearchPosition] = useState('');
+  const bodyRef = useRef();
+
+  const _handleBodyRef = () => {
+    bodyRef.current.focus();
+  };
 
   const _handleTitle = text => {
     setTitle(text);
@@ -47,6 +54,7 @@ function ArticleWrite({navigation}) {
         title,
         myPosition,
         searchPosition,
+        userSeq: user.id,
       },
     });
 
@@ -57,7 +65,9 @@ function ArticleWrite({navigation}) {
 
   // Theme ==================
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log(user);
+  }, []);
 
   return (
     <ArticleWriteView
@@ -69,6 +79,8 @@ function ArticleWrite({navigation}) {
       _handleBody={_handleBody}
       _handleMyPosition={_handleMyPosition}
       _handleSearchPosition={_handleSearchPosition}
+      _handleBodyRef={_handleBodyRef}
+      bodyRef={bodyRef}
     />
   );
 }

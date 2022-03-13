@@ -38,7 +38,7 @@ class ArticleModel extends Core {
   }
 
   getAll() {
-    const sql = `SELECT * FROM lolDuo.${this.table}`;
+    const sql = `SELECT * FROM lolDuo.${this.table} ORDER BY id DESC`;
 
     const res = this.core.excute({
       database: 'lolDuo',

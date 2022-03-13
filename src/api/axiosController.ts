@@ -2,13 +2,13 @@ import axios, {AxiosError} from 'axios';
 import {Alert} from 'react-native';
 import Config from 'react-native-config';
 
-const timeout = 2500;
 const instance = axios.create({
   baseURL: `http://127.0.0.1:8090/api`,
   // baseURL: `http://10.0.2.16:8090/api`,
   // baseURL: `http://127.0.0.1:8090/api`,
   // baseURL: `http://10.0.2.15:8090/api`,
-  timeout: timeout,
+  timeout: 2500,
+  withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -18,6 +18,8 @@ const instance = axios.create({
 instance.interceptors.request.use(
   // 요청 보내기 전  수행로직
   config => {
+    console.log('요청 보내기전입니다');
+
     return config;
   },
 
@@ -32,11 +34,17 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   // 응답 로직 생성
   response => {
+    const cookie: any = response.headers['set-cookie'];
+
+    console.log('res =>', cookie);
+
     return response;
   },
 
   // 응답 에러
   error => {
+    console.log('?');
+
     Alert.alert('알림', error.response.data?.msg || '서버 에러');
 
     return Promise.reject(error);

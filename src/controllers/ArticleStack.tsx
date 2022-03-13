@@ -3,6 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {Article, ArticleWrite} from '../controllers';
 import ArticleDetail from './ArticleDetail';
 import {styles} from '../assets';
+import {useFocusEffect} from '@react-navigation/native';
 
 const Stack = createNativeStackNavigator();
 
@@ -28,7 +29,7 @@ function ArticleStack({navigation}) {
         <Stack.Screen name="ArticleList" component={Article} />
         <Stack.Screen name="ArticleDetail" component={ArticleDetail} />
       </Stack.Group>
-      <Stack.Group>
+      <Stack.Group screenOptions={{presentation: 'modal'}}>
         <Stack.Screen name="ArticleWrite" component={ArticleWrite} />
       </Stack.Group>
     </Stack.Navigator>

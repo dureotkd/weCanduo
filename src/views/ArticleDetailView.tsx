@@ -1,13 +1,15 @@
 import React from 'react';
-import {TouchableOpacity} from 'react-native';
+import {TouchableOpacity, View} from 'react-native';
 import {Container, DefaultText} from '../assets/theme';
+import Reply from '../components/Reply';
+
 function ArticleDetailView({navigation}) {
   return (
     <Container>
-      <DefaultText>asddas</DefaultText>
-      <TouchableOpacity onPress={() => navigation.goBack()}>
-        <DefaultText>sdfsdf</DefaultText>
-      </TouchableOpacity>
+      <View>
+        <DefaultText>Article Details</DefaultText>
+        <Reply />
+      </View>
     </Container>
   );
 }
