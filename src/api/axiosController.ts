@@ -18,8 +18,6 @@ const instance = axios.create({
 instance.interceptors.request.use(
   // 요청 보내기 전  수행로직
   config => {
-    console.log('요청 보내기전입니다');
-
     return config;
   },
 

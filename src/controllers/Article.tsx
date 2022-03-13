@@ -5,24 +5,27 @@ import {userSlice} from '../slices';
 import axiosController from '../api/axiosController';
 import {Alert} from 'react-native';
 import {searchPositionDefault} from '../assets/defaut';
-import {useFocusEffect} from '@react-navigation/native';
+import {useFocusEffect, useIsFocused} from '@react-navigation/native';
 
 function Article({navigation}) {
   const dispatch = useDispatch();
+  const isFocused = useIsFocused();
   const [loading, setLoading] = useState(false);
   const [articles, setArticles] = useState([]);
 
-  const getArticle = useCallback(async () => {
+  const getArticle = async () => {
     const {data} = await axiosController({
       url: `/articles`,
       method: 'get',
     });
     setArticles(data.articles);
-  }, []);
+  };
 
-  useFocusEffect(() => {
+  useEffect(() => {
+    if (!isFocused) return;
+
     getArticle();
-  });
+  }, [isFocused]);
 
   // Theme ==================
   return (

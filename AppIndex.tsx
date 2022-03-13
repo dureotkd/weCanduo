@@ -118,14 +118,14 @@ function AppIndex() {
     <ThemeProvider theme={resTheme}>
       <>
         <NavigationContainer
-          onStateChange={
-            state => console.log('state Change')
-            // AsyncStorage.setItem('NAVIGATION_STATE', JSON.stringify(state))
+          fallback={
+            <View>
+              <DefaultText>로딩중</DefaultText>
+            </View>
           }
+          onStateChange={state => console.log('state Change')}
           theme={DarkTheme}>
-          <StatusBar
-            sbarStyle={themeIndex ? 'dark-content' : 'light-content'}
-          />
+          <StatusBar barStyle={themeIndex ? 'dark-content' : 'light-content'} />
           {accessToken ? (
             <Tab.Navigator
               screenOptions={({route}) => ({
